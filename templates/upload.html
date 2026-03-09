@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Gallery — PicShare{% endblock %}
+
+{% block nav_links %}
+<a href="/dashboard/" class="text-slate-400 hover:text-violet-400 transition-colors text-sm font-medium">← Dashboard</a>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 py-12">
+    <div class="animate-fade-in-up">
+
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                Create Gallery</h2>
+            <p class="text-slate-400 mt-2 text-sm">Upload images and configure your gallery settings</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="glass rounded-2xl p-8 gradient-border">
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- Title -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Gallery Title</label>
+                    <input type="text" name="title" placeholder="My Awesome Gallery"
+                        class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-slate-500">
+                </div>
+
+                <!-- File Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Select Images</label>
+                    <div class="relative">
+                        <input type="file" name="images" multiple id="file-input"
+                            class="input-field w-full px-4 py-3 rounded-xl text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-violet-500/20 file:text-violet-400 hover:file:bg-violet-500/30 file:cursor-pointer file:transition-colors">
+                    </div>
+                </div>
+
+                <!-- Toggles Grid -->
+                <div class="grid grid-cols-2 gap-4 pt-2">
+
+                    <!-- Public -->
+                    <label
+                        class="flex items-center gap-3 glass rounded-xl px-4 py-3.5 cursor-pointer hover:border-violet-500/30 transition-colors">
+                        <input type="checkbox" name="is_public"
+                            class="w-4.5 h-4.5 rounded border-slate-600 bg-slate-800 text-violet-500 focus:ring-violet-500 focus:ring-offset-0 accent-violet-500">
+                        <div>
+                            <span class="text-sm font-medium text-white">Public</span>
+                            <p class="text-xs text-slate-500">Anyone can view</p>
+                        </div>
+                    </label>
+
+                    <!-- Allow Download -->
+                    <label
+                        class="flex items-center gap-3 glass rounded-xl px-4 py-3.5 cursor-pointer hover:border-violet-500/30 transition-colors">
+                        <input type="checkbox" name="allow_download"
+                            class="w-4.5 h-4.5 rounded border-slate-600 bg-slate-800 text-violet-500 focus:ring-violet-500 focus:ring-offset-0 accent-violet-500">
+                        <div>
+                            <span class="text-sm font-medium text-white">Download</span>
+                            <p class="text-xs text-slate-500">Allow saving</p>
+                        </div>
+                    </label>
+
+                    <!-- Allow Comments -->
+                    <label
+                        class="flex items-center gap-3 glass rounded-xl px-4 py-3.5 cursor-pointer hover:border-violet-500/30 transition-colors">
+                        <input type="checkbox" name="allow_comment"
+                            class="w-4.5 h-4.5 rounded border-slate-600 bg-slate-800 text-violet-500 focus:ring-violet-500 focus:ring-offset-0 accent-violet-500">
+                        <div>
+                            <span class="text-sm font-medium text-white">Comments</span>
+                            <p class="text-xs text-slate-500">Allow feedback</p>
+                        </div>
+                    </label>
+
+                    <!-- Allow Likes -->
+                    <label
+                        class="flex items-center gap-3 glass rounded-xl px-4 py-3.5 cursor-pointer hover:border-violet-500/30 transition-colors">
+                        <input type="checkbox" name="allow_like"
+                            class="w-4.5 h-4.5 rounded border-slate-600 bg-slate-800 text-violet-500 focus:ring-violet-500 focus:ring-offset-0 accent-violet-500">
+                        <div>
+                            <span class="text-sm font-medium text-white">Likes</span>
+                            <p class="text-xs text-slate-500">Allow reactions</p>
+                        </div>
+                    </label>
+
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Password <span
+                            class="text-slate-500 font-normal">(optional)</span></label>
+                    <input type="text" name="password" placeholder="Leave empty for no password"
+                        class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-slate-500">
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                    class="btn-gradient w-full py-3.5 rounded-xl text-white font-semibold text-sm tracking-wide uppercase mt-2">
+                    🚀 Create & Share Gallery
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

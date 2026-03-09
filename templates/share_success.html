@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery Created — PicShare{% endblock %}
+
+{% block nav_links %}
+<a href="/dashboard/" class="text-slate-400 hover:text-violet-400 transition-colors text-sm font-medium">← Dashboard</a>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-[calc(100vh-73px)] flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-lg animate-fade-in-up">
+
+        <div class="glass rounded-2xl p-8 gradient-border text-center">
+
+            <!-- Success Icon -->
+            <div
+                class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center mx-auto mb-6 border border-emerald-500/20">
+                <span class="text-4xl">🎉</span>
+            </div>
+
+            <h2
+                class="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent mb-2">
+                Gallery Created!
+            </h2>
+            <p class="text-slate-400 text-sm mb-8">Your gallery is live. Share this link with friends:</p>
+
+            <!-- Share Link -->
+            <div class="flex items-center gap-2 bg-slate-900/60 rounded-xl p-3 border border-slate-700/50 mb-8">
+                <div class="flex-1 text-left px-2">
+                    <p class="text-xs text-slate-500 mb-1">Gallery Link</p>
+                    <a href="/gallery/{{ gallery.slug }}/" id="share-link"
+                        class="text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors break-all">
+                        http://127.0.0.1:8000/gallery/{{ gallery.slug }}/
+                    </a>
+                </div>
+                <button onclick="copyLink()" id="copy-btn"
+                    class="shrink-0 px-4 py-2 rounded-lg bg-violet-500/20 hover:bg-violet-500/30 border border-violet-500/20 text-violet-400 text-sm font-medium transition-all duration-300 hover:scale-105">
+                    Copy
+                </button>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+                <a href="/gallery/{{ gallery.slug }}/" class="flex-1">
+                    <button class="btn-gradient w-full py-3 rounded-xl text-white font-semibold text-sm">
+                        🖼️ View Gallery
+                    </button>
+                </a>
+                <a href="/activity/" class="flex-1">
+                    <button
+                        class="w-full py-3 rounded-xl text-violet-400 font-semibold text-sm border border-violet-500/30 hover:bg-violet-500/10 transition-all duration-300">
+                        📊 Activity Feed
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function copyLink() {
+        const link = document.getElementById('share-link').innerText;
+        navigator.clipboard.writeText(link).then(() => {
+            const btn = document.getElementById('copy-btn');
+            btn.innerText = 'Copied!';
+            btn.classList.add('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/20');
+            btn.classList.remove('bg-violet-500/20', 'text-violet-400', 'border-violet-500/20');
+            setTimeout(() => {
+                btn.innerText = 'Copy';
+                btn.classList.remove('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/20');
+                btn.classList.add('bg-violet-500/20', 'text-violet-400', 'border-violet-500/20');
+            }, 2000);
+        });
+    }
+</script>
+{% endblock %}

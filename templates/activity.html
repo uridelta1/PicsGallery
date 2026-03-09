@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Activity Feed — PicShare{% endblock %}
+
+{% block nav_links %}
+<a href="/dashboard/" class="text-slate-400 hover:text-violet-400 transition-colors text-sm font-medium">← Dashboard</a>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-6 py-12">
+
+    <!-- Header -->
+    <div class="text-center mb-10 animate-fade-in-up">
+        <h2 class="text-3xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+            Activity Feed</h2>
+        <p class="text-slate-400 mt-2 text-sm">Recent interactions on your galleries</p>
+    </div>
+
+    <!-- Activity List -->
+    <div class="space-y-4">
+
+        {% for act in activities %}
+        <div class="glass rounded-xl p-4 flex items-center gap-4 card-hover animate-fade-in-up"
+            style="animation-delay: {{ forloop.counter0 }}00ms">
+
+            <!-- Thumbnail -->
+            <div class="shrink-0">
+                <img src="{{ act.image.image.url }}" alt="Activity image"
+                    class="w-16 h-16 rounded-xl object-cover border border-white/10">
+            </div>
+
+            <!-- Info -->
+            <div class="flex-1 min-w-0">
+                <p class="text-sm text-white">
+                    <span class="font-semibold text-violet-400">{{ act.user.username }}</span>
+                    <span class="text-slate-300">
+                        {% if act.action == "liked" %}
+                        ❤️ liked
+                        {% elif act.action == "commented" %}
+                        💬 commented on
+                        {% else %}
+                        {{ act.action }}
+                        {% endif %}
+                    </span>
+                    <span class="text-slate-400">your image in</span>
+                    <span class="font-medium text-indigo-400">{{ act.image.gallery.title }}</span>
+                </p>
+                <p class="text-xs text-slate-500 mt-1">{{ act.created_at|timesince }} ago</p>
+            </div>
+
+            <!-- Action badge -->
+            <div class="shrink-0">
+                {% if act.action == "liked" %}
+                <span
+                    class="px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-400 text-xs font-medium border border-rose-500/20">Like</span>
+                {% elif act.action == "commented" %}
+                <span
+                    class="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/20">Comment</span>
+                {% else %}
+                <span
+                    class="px-2.5 py-1 rounded-lg bg-slate-500/10 text-slate-400 text-xs font-medium border border-slate-500/20">{{
+                    act.action }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+
+        <!-- Empty State -->
+        <div class="glass rounded-2xl p-12 text-center gradient-border animate-fade-in-up">
+            <div class="w-16 h-16 rounded-2xl bg-slate-800/50 flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                </svg>
+            </div>
+            <p class="text-slate-500 text-sm">No activity yet</p>
+            <p class="text-slate-600 text-xs mt-1">Interactions on your galleries will show up here</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
