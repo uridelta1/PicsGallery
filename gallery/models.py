@@ -12,7 +12,7 @@ class Gallery(models.Model):
 
     is_public = models.BooleanField(default=True)
 
-    password = models.CharField(max_length=100, blank=True)
+    password = models.CharField(max_length=8, blank=True)
 
     allow_download = models.BooleanField(default=True)
 
@@ -54,7 +54,7 @@ class Comment(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    text = models.TextField()
+    text = models.TextField(max_length=100)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

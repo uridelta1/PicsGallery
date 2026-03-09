@@ -39,8 +39,8 @@
                 <div class="flex items-center gap-3 mt-1">
                     <span class="text-xs text-slate-500">{{ gallery.created_at|timesince }} ago</span>
                     <span class="text-xs text-slate-600">•</span>
-                    <span class="text-xs text-slate-500">{{ gallery.image_set.count }} photo{{
-                        gallery.image_set.count|pluralize }}</span>
+                    <span class="text-xs text-slate-500">{{ gallery.image_set.count }} photo
+                        {% comment %} {{gallery.image_set.count|pluralize }}</span> {% endcomment %}
                     {% if gallery.is_public %}
                     <span
                         class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20">Public</span>
