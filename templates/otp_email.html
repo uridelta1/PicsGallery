@@ -1,0 +1,44 @@
+{%extends "base.html"%}
+{% block content %}
+<body style="margin:0; padding:0; background:#0f172a; font-family:Arial, sans-serif;">
+
+    <div style="max-width:500px; margin:40px auto; background:#111827; padding:30px; border-radius:12px; text-align:center; color:white;">
+
+        <h2 style="font-size:24px; margin-bottom:10px;">
+            Hello {{ user.username }} 👋
+        </h2>
+
+        <h3 style="color:#a78bfa; margin-bottom:20px;">
+            Email Verification 🔐
+        </h3>
+
+        <p style="color:#9ca3af;">
+            Use the OTP below to verify your account:
+        </p>
+
+        <div style="
+            margin:20px auto;
+            padding:15px;
+            font-size:28px;
+            font-weight:bold;
+            letter-spacing:5px;
+            background:linear-gradient(90deg,#7c3aed,#4f46e5);
+            border-radius:10px;
+            display:inline-block;
+        ">
+            {{ otp }}
+        </div>
+
+        <p style="color:#9ca3af; margin-top:20px;">
+            This OTP is valid for 5 minutes.
+        </p>
+
+        <p style="font-size:12px; color:#6b7280; margin-top:30px;">
+            If you didn’t request this, you can ignore this email.
+        </p>
+
+    </div>
+
+</body>
+
+{% endblock %}
