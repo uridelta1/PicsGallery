@@ -5,25 +5,8 @@ from django.contrib.auth.decorators import login_required
 from gallery.models import Activity
 from .models import User, EmailOTP
 from .utils import send_otp_email
+from .models import User
 
-
-# def signup_view(request):
-
-#     if request.method == "POST":
-
-#         username = request.POST['username']
-#         email = request.POST['email']
-#         password = request.POST['password']
-
-#         user = User.objects.create_user(
-#             username=username,
-#             email=email,
-#             password=password
-#         )
-
-#         return redirect('login')
-
-#     return render(request, "signup.html")
 
 def signup_view(request):
     if request.method == "POST":
@@ -72,60 +55,6 @@ def verify_otp(request, user_id):
             return render(request, "verify.html", {"error": "Invalid OTP"})
 
     return render(request, "verify.html")
-
-
-
-# def login_view(request):
-
-#     if request.method == "POST":
-
-#         username = request.POST['username']
-#         password = request.POST['password']
-
-#         user = authenticate(username=username, password=password)
-
-#         if user:
-#             login(request, user)
-#             return redirect('dashboard')
-
-#     return render(request, "login.html")
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from .models import User
-
-
-# def login_view(request):
-#     if request.method == "POST":
-#         identifier = request.POST.get('username')  # email OR username
-#         password = request.POST.get('password')
-
-#         user = None
-
-#         # 🔥 Check if input is email or username
-#         if "@" in identifier:
-#             try:
-#                 user_obj = User.objects.get(email=identifier)
-#                 user = authenticate(request, username=user_obj.username, password=password)
-#             except User.DoesNotExist:
-#                 user = None
-#         else:
-#             user = authenticate(request, username=identifier, password=password)
-
-#         if user:
-#             if user.is_verified:
-#                 login(request, user)
-#                 return redirect('dashboard')
-#             else:
-#                 return render(request, "login.html", {
-#                     "error": "Please verify your email first"
-#                 })
-#         else:
-#             return render(request, "login.html", {
-#                 "error": "Invalid email/username or password"
-#             })
-
-#     return render(request, "login.html")
 
 def login_view(request):
     if request.method == "POST":
