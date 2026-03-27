@@ -30,7 +30,8 @@
                     <p class="text-xs text-slate-500 mb-1">Gallery Link</p>
                     <a href="/gallery/{{ gallery.slug }}/" id="share-link"
                         class="text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors break-all">
-                        http://127.0.0.1:8000/gallery/{{ gallery.slug }}/
+                        {% comment %} http://127.0.0.1:8000/gallery/{{ gallery.slug }}/ {% endcomment %}
+                        {{ gallery.slug }}
                     </a>
                 </div>
                 <button onclick="copyLink()" id="copy-btn"

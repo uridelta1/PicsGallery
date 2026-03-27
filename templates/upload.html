@@ -17,6 +17,14 @@
             <p class="text-slate-400 mt-2 text-sm">Upload images and configure your gallery settings</p>
         </div>
 
+            {% if messages %}
+                {% for message in messages %}
+                    <script>
+                           alert("{{ message }}");
+                    </script>
+                {% endfor %}
+            {% endif %}
+
         <!-- Form Card -->
         <div class="glass rounded-2xl p-8 gradient-border">
             <form method="POST" enctype="multipart/form-data" class="space-y-6">
@@ -24,8 +32,8 @@
 
                 <!-- Title -->
                 <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-2">Gallery Title</label>
-                    <input type="text" name="title" placeholder="My Awesome Gallery"
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Gallery Title </label>
+                    <input type="text" name="title" placeholder="My Awesome Gallery"  required
                         class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-slate-500">
                 </div>
 
@@ -33,7 +41,7 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">Select Images</label>
                     <div class="relative">
-                        <input type="file" name="images" multiple id="file-input"
+                        <input type="file" name="images" multiple id="file-input" required
                             class="input-field w-full px-4 py-3 rounded-xl text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-violet-500/20 file:text-violet-400 hover:file:bg-violet-500/30 file:cursor-pointer file:transition-colors">
                     </div>
                 </div>

@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from .models import Gallery, Image,Activity,Comment
+from django.contrib import messages
 import uuid
 
 
@@ -35,7 +36,7 @@ def upload_gallery(request):
         allow_like = request.POST.get('allow_like')
 
         slug = uuid.uuid4().hex[:10]
-
+        
         gallery = Gallery.objects.create(
 
             owner=request.user,
@@ -49,6 +50,10 @@ def upload_gallery(request):
 
         )
 
+        # if not title or not gallery or not password or not images:
+        #   messages.error(request, "Some Fields are required")
+        #   return redirect('upload')  
+        
         images = request.FILES.getlist('images')
 
         for img in images:

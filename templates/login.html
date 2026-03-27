@@ -15,19 +15,27 @@
                 <p class="text-slate-400 mt-2 text-sm">Sign in to your PicShare account</p>
             </div>
 
+                     {% if messages %}
+                        {% for message in messages %}
+                            <script>
+                            alert("{{ message }}");
+                            </script>
+                        {% endfor %}
+                    {% endif %}
+
             <form method="POST" class="space-y-5">
                 {% csrf_token %}
 
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">Username</label>
                     {% comment %} <input type="text" name="username" placeholder="Enter your username" {% endcomment %}
-                    <input type="text" name="username" placeholder="Email or Username"
+                    <input type="text" name="username" placeholder="Email or Username" required
                         class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-slate-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
-                    <input type="password" name="password" placeholder="Enter your password"
+                    <input type="password" name="password" placeholder="Enter your password" required
                         class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-slate-500">
                 </div>
 

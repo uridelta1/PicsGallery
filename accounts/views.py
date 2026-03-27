@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from gallery.models import Activity
 from .models import User, EmailOTP
+from django.contrib import messages
 from .utils import send_otp_email
 from .models import User
 
@@ -13,8 +14,12 @@ def signup_view(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-
-                # ✅ Check if email already exists
+        
+        
+        # if not username or not email or not password:
+        #     messages.error(request, "All fields are required")
+        #     return redirect('signup')  
+            
         if User.objects.filter(email=email).exists():
             return render(request, "login.html", {
                 "error": "Email already registered"
@@ -76,6 +81,10 @@ def login_view(request):
                 user = None
 
         print("USER:", user)  # debug
+        
+        if not identifier  or not password:
+            messages.error(request, "All fields are required")
+            return redirect('login')  
 
         if user is not None:
             if user.is_active:

@@ -1,19 +1,27 @@
 from django.db import models
 # from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Gallery(models.Model):
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200,blank=False,null=False)
 
     slug = models.SlugField(unique=True)
 
     is_public = models.BooleanField(default=True)
 
-    password = models.CharField(max_length=8, blank=True)
+    # password = models.IntegerField(max_length=8, min_length=4, blank=True)
+    password = models.CharField(
+       max_length=8,
+        blank=True,
+        validators=[
+                MinLengthValidator(4)
+            ]
+        )
 
     allow_download = models.BooleanField(default=True)
 
@@ -29,9 +37,9 @@ class Gallery(models.Model):
 
 class Image(models.Model):
 
-    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
+    gallery = models.ForeignKey(Gallery, null=False,blank=False, on_delete=models.CASCADE)
 
-    image = models.ImageField(upload_to="gallery_images")
+    image = models.ImageField(upload_to="gallery_images" ,null=False,blank=False,)
 
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
