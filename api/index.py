@@ -1,7 +1,12 @@
 import os
 import sys
 
-# Add project root to path
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+# VERY IMPORTANT 👇
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE_DIR)
 
-from config.wsgi import application
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+
+from django.core.wsgi import get_wsgi_application
+
+application = get_wsgi_application()
